@@ -86,7 +86,78 @@
                     </StackPanel>
                 </Grid>
             </GroupBox>
+            <TabControl Margin="5 5 5 5" Grid.Column="3" Grid.Row="0">
+                <TabItem Header="Neo bản thang" FontSize="16" FontWeight="Bold">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="125"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Vươn Của Thép (A) "  Height="16" Margin="5,0,0,0" FontSize="13"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text=" Độ Dài Neo (A1) " Height="16" Margin="5,0,0,0" FontSize="13"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="2" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text=" F1 =" Height="16" Margin="5,0,0,0" FontSize="13"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90"  HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="3" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text=" F2 =" Height="16" Margin="5,0,0,0" FontSize="13"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,14,0,8" Height="28" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="4" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="Dữ liệu cầu thang"  FontSize="13" VerticalAlignment="Top" FontWeight="Bold" Margin="75,20,0,0"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Neo chiếu nghỉ" FontSize="16" FontWeight="Bold">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" FontSize="13" Text=" L1 =" VerticalAlignment="Center" Height="16"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" FontSize="13"  Width="120" HorizontalAlignment="Center" FontWeight="Regular" Margin="0,10,0,10"/>
+                        <TextBlock Grid.Column="2" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="13"  Text="L2 =" VerticalAlignment="Center" Height="16"/>
+                        <TextBox Grid.Row="1" Grid.Column="1"  FontSize="13"  Width="120" HorizontalAlignment="Center" FontWeight="Regular" Margin="0,10,0,10"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" FontSize="13" Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           Height="40" FontSize="13">
+                    <Run Text="Đoạn Kéo"/>
+                    <LineBreak/>
+                    <Run Text="Dài (A)"/>
+                        </TextBlock>
+                        <TextBox FontSize="13" FontWeight="Regular" Grid.Row="2" Grid.Column="1"  Margin="0,11,0,11" Width="120" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" FontSize="13" Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
         </Grid>
+
     </StackPanel>
 </Window>
 
