@@ -8,6 +8,86 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Title="RebarStair" Height="675" Width="1400">
-    
+    <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="280"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="555"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="270"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <GroupBox Header="Cầu thang" FontSize="16" FontWeight="Bold" Margin="5 5 5 0" Height="290" >
+                        <StackPanel>
+                            <Label Content="Bề rộng thang (mm)" FontSize="13"/>
+                            <TextBox Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="27"/>
+                            <Label Content="Bề rộng chiếu nghỉ (mm)" FontSize="13"/>
+                            <TextBox Margin="0,5,0,10" Height="27" FontSize="13" FontWeight="Regular"/>
+                            <Label Content="Loại cầu thang" FontSize="13"/>
+                            <ComboBox Name="StairType" Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="26"  DisplayMemberPath="Name"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+            <GroupBox Header="Bản Thang " FontSize="16" FontWeight="Bold"  Margin="5 5 5 5" Grid.Column="2" Grid.Row="0" >
+                <Grid Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="110"/>
+                        <RowDefinition Height="130"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Thép" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" FontSize="13"  >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ItemsControl>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Rows="0" Columns="0"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton GroupName="RebarOptionsGroup">
+                                            <RadioButton.Content>
+                                                <TextBlock/>
+                                            </RadioButton.Content>
+                                        </RadioButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </GroupBox>
+                    <StackPanel Grid.Row="1">
+                        <Grid Height="116">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Đường kính" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách" FontSize="13" FontWeight="Bold" Margin="2 10 0 0" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Lớp bảo vệ" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
+                            <ComboBox FontSize="13" FontWeight="Regular" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
+                            <TextBox  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
+                            <TextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </StackPanel>
 </Window>
+
 
