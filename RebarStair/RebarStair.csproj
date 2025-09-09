@@ -9,12 +9,50 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Chieunghi.png" />
+    <None Remove="Images\newtype1.png" />
+    <None Remove="Images\pallet.png" />
+    <None Remove="Images\PalletColour.png" />
+    <None Remove="Images\typ1s1.png" />
+    <None Remove="Images\typ1s2.png" />
+    <None Remove="Images\typ4s1.png" />
+    <None Remove="Images\typ4s2.png" />
+    <None Remove="Images\Type4.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="RebarStair\Model\" />
     <Folder Include="RebarStair\ViewModel\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Rebar.csproj" />
+    <Resource Include="Images\Chieunghi.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\newtype1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pallet.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PalletColour.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\typ1s1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\typ1s2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\typ4s1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\typ4s2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Type4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

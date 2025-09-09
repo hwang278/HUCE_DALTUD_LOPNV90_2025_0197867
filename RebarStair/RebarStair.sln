@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13 d17.14
+VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebarStair", "RebarStair.csproj", "{1EC17782-37D4-4ABA-9F9C-B17286F95573}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebarStair", "RebarStair.csproj", "{B3B3EAD2-E3D0-47EF-AB76-DB85FDCF4AF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1EC17782-37D4-4ABA-9F9C-B17286F95573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EC17782-37D4-4ABA-9F9C-B17286F95573}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EC17782-37D4-4ABA-9F9C-B17286F95573}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EC17782-37D4-4ABA-9F9C-B17286F95573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B3EAD2-E3D0-47EF-AB76-DB85FDCF4AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B3EAD2-E3D0-47EF-AB76-DB85FDCF4AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B3EAD2-E3D0-47EF-AB76-DB85FDCF4AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B3EAD2-E3D0-47EF-AB76-DB85FDCF4AF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
