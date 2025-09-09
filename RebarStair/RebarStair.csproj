@@ -16,5 +16,6 @@
   <ItemGroup>
     <None Include="Rebar.csproj" />
   </ItemGroup>
-
+    <PackageReference Include="MaterialDesignColors" Version="2.1.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
 </Project>
