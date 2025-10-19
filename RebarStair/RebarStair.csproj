@@ -1,20 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
+		<OutputType>Library</OutputType> 
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<UseWPF>true</UseWPF>
+		<UseWPF>true</UseWPF> 
 	</PropertyGroup>
 	<ItemGroup>
-		<Folder Include="RebarStair\Model\" />
+	  <None Remove="Images\Chieunghi.png" />
+	  <None Remove="Images\newtype1.png" />
+	  <None Remove="Images\pallet.png" />
+	  <None Remove="Images\PalletColour.png" />
+	  <None Remove="Images\typ1s1.png" />
+	  <None Remove="Images\typ1s2.png" />
+	  <None Remove="Images\typ4s1.png" />
+	  <None Remove="Images\typ4s2.png" />
+	  <None Remove="Images\Type4.png" />
+	</ItemGroup>
+	<ItemGroup>
 		<Folder Include="RebarStair\ViewModel\" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Rebar.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="Autodesk.Revit.SDK" Version="2026.0.0.9999" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="MaterialDesignColors" Version="2.1.3" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Images\Chieunghi.png" />
+	  <Resource Include="Images\newtype1.png" />
+	  <Resource Include="Images\pallet.png" />
+	  <Resource Include="Images\PalletColour.png" />
+	  <Resource Include="Images\typ1s1.png" />
+	  <Resource Include="Images\typ1s2.png" />
+	  <Resource Include="Images\typ4s1.png" />
+	  <Resource Include="Images\typ4s2.png" />
+	  <Resource Include="Images\Type4.png" />
 	</ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B3B3EAD2-E3D0-47EF-AB76-DB85FDCF4AF5}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType> <!-- Đổi từ WinExe sang Library để build DLL -->
     <RootNamespace>Rebar</RootNamespace>
     <AssemblyName>Rebar</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>

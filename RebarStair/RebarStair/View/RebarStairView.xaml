@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rebar.RebarStair.View"
+        xmlns:viewModel="clr-namespace:RebarStair.RebarStair.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance viewModel:RebarStairViewModel, IsDesignTimeCreatable = True}"
         ResizeMode="NoResize"
         Title="RebarStair" Height="675" Width="1400">
     <StackPanel>
@@ -29,7 +31,9 @@
                             <Label Content="Bề rộng chiếu nghỉ (mm)" FontSize="13"/>
                             <TextBox Margin="0,5,0,10" Height="27" FontSize="13" FontWeight="Regular"/>
                             <Label Content="Loại cầu thang" FontSize="13"/>
-                            <ComboBox Name="StairType" Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="26"  DisplayMemberPath="Name"/>
+                            <ComboBox Name="StairType" Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="26" ItemsSource="{Binding StairType}"
+                                      SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                                      DisplayMemberPath="Name"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
@@ -79,7 +83,7 @@
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Đường kính" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách" FontSize="13" FontWeight="Bold" Margin="2 10 0 0" />
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Lớp bảo vệ" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
-                            <ComboBox FontSize="13" FontWeight="Regular" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
+                            <ComboBox  ItemsSource="{Binding DuongKinhThep}" FontSize="13" FontWeight="Regular" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
                             <TextBox  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                             <TextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                         </Grid>
@@ -156,7 +160,7 @@
                 </TabItem>
             </TabControl>
             <GroupBox Header="Hình ảnh" FontSize="16" FontWeight="Bold" Grid.Column =" 1"  Grid.Row="1" Margin="5 5 5 0"  Grid.RowSpan="2" Grid.ColumnSpan="2">
-                <Image Stretch="Uniform" Margin="12,0,12,0"/>
+                <Image Source="{Binding SelectedType.ImageSource}" Stretch="Uniform" Margin="12,0,12,0"/>
             </GroupBox>
             <GroupBox Header="Hình ảnh" FontSize="16" FontWeight="Bold" Margin="5 5 5 0" Grid.Column =" 0"  Grid.Row="0" Grid.RowSpan="2">
                 <Grid>
@@ -165,9 +169,9 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="60"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Stretch="Uniform" Margin="12,0,12,0"/>
-                    <Image Grid.Row="1"  Stretch="Uniform" Margin="12,0,12,0"/>
-                    <Image Grid.Row="2"  Stretch="UniformToFill" ></Image>
+                    <Image Source="{Binding SelectedType.ImageSource1}" Stretch="Uniform" Margin="12,0,12,0"/>
+                    <Image Source="{Binding SelectedType.ImageSource2}" Grid.Row="1"  Stretch="Uniform" Margin="12,0,12,0"/>
+                    <Image Source="{Binding SelectedType.ImageSource3}" Grid.Row="2"  Stretch="UniformToFill" ></Image>
                 </Grid>
             </GroupBox>
             <GroupBox Grid.Column="3" Grid.Row="1" Margin="5 5 5 0 " FontSize="16" FontWeight="Bold" Header="Dữ liệu khác">
