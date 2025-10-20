@@ -24,10 +24,8 @@
 		<None Include="Rebar.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Autodesk.Revit.SDK" Version="2026.0.0.9999" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="MaterialDesignColors" Version="2.1.3" />
-		<PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+	  <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Images\Chieunghi.png" />
