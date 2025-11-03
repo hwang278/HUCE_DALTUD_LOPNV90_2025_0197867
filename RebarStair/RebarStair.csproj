@@ -4,18 +4,16 @@
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<UseWPF>true</UseWPF> 
+		<UseWPF>true</UseWPF>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<NuGetAuditMode>all</NuGetAuditMode> 
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Images\Chieunghi.png" />
 	  <None Remove="Images\newtype1.png" />
-	  <None Remove="Images\pallet.png" />
 	  <None Remove="Images\PalletColour.png" />
 	  <None Remove="Images\typ1s1.png" />
 	  <None Remove="Images\typ1s2.png" />
-	  <None Remove="Images\typ4s1.png" />
-	  <None Remove="Images\typ4s2.png" />
-	  <None Remove="Images\Type4.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="RebarStair\ViewModel\" />
@@ -30,12 +28,8 @@
 	<ItemGroup>
 	  <Resource Include="Images\Chieunghi.png" />
 	  <Resource Include="Images\newtype1.png" />
-	  <Resource Include="Images\pallet.png" />
 	  <Resource Include="Images\PalletColour.png" />
 	  <Resource Include="Images\typ1s1.png" />
 	  <Resource Include="Images\typ1s2.png" />
-	  <Resource Include="Images\typ4s1.png" />
-	  <Resource Include="Images\typ4s2.png" />
-	  <Resource Include="Images\Type4.png" />
 	</ItemGroup>
 </Project>

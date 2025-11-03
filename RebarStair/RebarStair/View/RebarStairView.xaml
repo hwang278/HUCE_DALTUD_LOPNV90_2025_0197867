@@ -50,7 +50,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ItemsControl>
+                            <ItemsControl ItemsSource="{Binding RebarOptionList}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <UniformGrid Rows="0" Columns="0"/>
@@ -58,9 +58,10 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <RadioButton GroupName="RebarOptionsGroup">
+                                        <RadioButton GroupName="RebarOptionsGroup"
+                                                     IsChecked="{Binding IsChecked, Mode=TwoWay}">
                                             <RadioButton.Content>
-                                                <TextBlock/>
+                                                <TextBlock Text="{Binding Name}" />
                                             </RadioButton.Content>
                                         </RadioButton>
                                     </DataTemplate>
@@ -171,7 +172,7 @@
                     </Grid.RowDefinitions>
                     <Image Source="{Binding SelectedType.ImageSource1}" Stretch="Uniform" Margin="12,0,12,0"/>
                     <Image Source="{Binding SelectedType.ImageSource2}" Grid.Row="1"  Stretch="Uniform" Margin="12,0,12,0"/>
-                    <Image Source="{Binding SelectedType.ImageSource3}" Grid.Row="2"  Stretch="UniformToFill" ></Image>
+                    <Image Source="{Binding SelectedType.ImageSource3}" Grid.Row="2"  Stretch="UniformToFill"  ></Image>
                 </Grid>
             </GroupBox>
             <GroupBox Grid.Column="3" Grid.Row="1" Margin="5 5 5 0 " FontSize="16" FontWeight="Bold" Header="Dữ liệu khác">
