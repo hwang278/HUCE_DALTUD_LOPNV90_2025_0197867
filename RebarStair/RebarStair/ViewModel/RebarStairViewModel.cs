@@ -18,7 +18,6 @@ namespace RebarStair.RebarStair.ViewModel
 {
     public class RebarStairViewModel : ObservableObject
     {
-       
         private StairType _selectedType;
         public RebarStairView RebarStairView { get; set; }
         public List<StairType> StairType { get; set; }
@@ -64,7 +63,7 @@ namespace RebarStair.RebarStair.ViewModel
 
         public RebarStairViewModel(UIApplication uiApp, Document doc, UIDocument uiDoc)
         {
-           
+
             this.uiApp = uiApp;
             this.doc = doc;
             this.uiDoc = uiDoc;
@@ -72,6 +71,7 @@ namespace RebarStair.RebarStair.ViewModel
             StairType = new List<StairType>
             {
                 new StairType { Name = "Type1", ImagePath = "/RebarStair;component/Images/newtype1.png", ImagePath1 = "/RebarStair;component/Images/typ1s1.png",     ImagePath2 = "/RebarStair;component/Images/typ1s2.png",     ImagePath3 = "/RebarStair;component/Images/pallet.png" },
+                new StairType { Name = "Type2", ImagePath = "/RebarStair;component/Images/newtype2.png", ImagePath1 = "/RebarStair;component/Images/typ2s1.png",     ImagePath2 = "/RebarStair;component/Images/typ2s2.png",     ImagePath3 = "/RebarStair;component/Images/pallet.png" },
                 new StairType { Name = "Chiếu Nghỉ", ImagePath = "/RebarStair;component/Images/Chieunghi.jpg", ImagePath1 = "/RebarStair;component/Images/Chieunghi.png",  ImagePath2 = "/RebarStair;component/Images/PalletColour.png" ,     ImagePath3 = "/RebarStair;component/Images/pallet.png"},
             };
             SelectedType = StairType.FirstOrDefault();
@@ -91,7 +91,7 @@ namespace RebarStair.RebarStair.ViewModel
                 new RebarOption
                     { OptionId = 5, Name = "5", DuongKinh = DuongKinhThep.FirstOrDefault(x => x.Name.Contains("D6")) }
             };
-            
+
 
         }
         void GetData()
@@ -100,7 +100,7 @@ namespace RebarStair.RebarStair.ViewModel
                 .Cast<RebarBarType>()
                 .OrderBy(x => x.Name)
                 .ToList();
-           
+
 
         }
 
