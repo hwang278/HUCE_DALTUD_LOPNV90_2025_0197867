@@ -93,8 +93,8 @@
                     </StackPanel>
                 </Grid>
             </GroupBox>
-            <TabControl Margin="5 5 5 5" Grid.Column="3" Grid.Row="0">
-                <TabItem Header="Neo bản thang" FontSize="16" FontWeight="Bold">
+            <TabControl Margin="5 5 5 5" Grid.Column="3" Grid.Row="0" >
+                <TabItem Header="Neo bản thang" FontSize="16" FontWeight="Bold" >
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -206,8 +206,8 @@
             Orientation="Horizontal"
             HorizontalAlignment="Right"
             Margin="0,10,35,10">
-            <Button Width="150" Height="30" Content="Pick WorkPlane"
-            Margin="0,0,10,0" />
+            <Button Width="110" Height="30" Content="Pick WorkPlane"
+                    Margin="0,0,10,0" Command="{Binding PickWorkPlaneCommand}" />
             <Button Width="86" Height="30" Content="Vẽ Thép"
             Margin="0,0,10,0" />
             <Button Width="86" Height="30" Content="Quit"/>
