@@ -50,22 +50,25 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ItemsControl>
+                            <ItemsControl ItemsSource="{Binding RebarOptionList}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <UniformGrid Rows="0" Columns="0"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
+
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <RadioButton GroupName="RebarOptionsGroup">
+                                        <RadioButton GroupName="RebarOptionsGroup"
+                                                     IsChecked="{Binding IsChecked, Mode=TwoWay}">
                                             <RadioButton.Content>
-                                                <TextBlock/>
+                                                <TextBlock Text="{Binding Name}" />
                                             </RadioButton.Content>
                                         </RadioButton>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+
                         </Grid>
                     </GroupBox>
                     <StackPanel Grid.Row="1">
@@ -83,15 +86,15 @@
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Đường kính" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách" FontSize="13" FontWeight="Bold" Margin="2 10 0 0" />
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Lớp bảo vệ" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
-                            <ComboBox  ItemsSource="{Binding DuongKinhThep}" FontSize="13" FontWeight="Regular" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
+                            <ComboBox ItemsSource="{Binding DuongKinhThep}" FontSize="13" FontWeight="Regular" SelectedItem="{Binding SelectedRebarOption.DuongKinh}" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
                             <TextBox  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                             <TextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
             </GroupBox>
-            <TabControl Margin="5 5 5 5" Grid.Column="3" Grid.Row="0">
-                <TabItem Header="Neo bản thang" FontSize="16" FontWeight="Bold">
+            <TabControl Margin="5 5 5 5" Grid.Column="3" Grid.Row="0" >
+                <TabItem Header="Neo bản thang" FontSize="16" FontWeight="Bold" >
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -203,13 +206,11 @@
             Orientation="Horizontal"
             HorizontalAlignment="Right"
             Margin="0,10,35,10">
-            <Button Width="150" Height="30" Content="Pick WorkPlane"
-            Margin="0,0,10,0" />
+            <Button Width="110" Height="30" Content="Pick WorkPlane"
+                    Margin="0,0,10,0" Command="{Binding PickWorkPlaneCommand}" />
             <Button Width="86" Height="30" Content="Vẽ Thép"
             Margin="0,0,10,0" />
             <Button Width="86" Height="30" Content="Quit"/>
         </StackPanel>
     </StackPanel>
 </Window>
-
-
