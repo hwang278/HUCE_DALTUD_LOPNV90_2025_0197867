@@ -272,8 +272,8 @@ namespace RebarStair.RebarStair.ViewModel
         private double _f2 = 300;
         private RebarBarType _duongKinhThepDai1;
 
-        public RebarStairViewModel(UIApplication uiApp, Document doc, UIDocument uiDoc)
-        {
+        public RebarStairViewModel (UIApplication uiApp, Document doc, UIDocument uiDoc)
+        {   
 
             this.uiApp = uiApp;
             this.doc = doc;
@@ -344,7 +344,7 @@ namespace RebarStair.RebarStair.ViewModel
                 .OrderBy(x => x.Name)
                 .ToList();
 
-            // Use FeetToMm for conversion
+          
             DuongKinhThepChinh = DuongKinhThep.FirstOrDefault(x => x.BarNominalDiameter.FeetToMm() >= 6);
             DuongKinhThepGiaCuong = DuongKinhThep.FirstOrDefault(x => x.BarNominalDiameter.FeetToMm() > 6);
 
@@ -390,8 +390,9 @@ namespace RebarStair.RebarStair.ViewModel
 
                 tx.Commit();
             }
+        }
 
-            void SelectPointsForType()
+        void SelectPointsForType()
             {
                 StairModel.P1 = uiDoc.Selection.PickPoint("P1");
                 StairModel.P2 = uiDoc.Selection.PickPoint("P2");
@@ -682,7 +683,7 @@ namespace RebarStair.RebarStair.ViewModel
                     true
                 );
             }
-        }
+        
 
         public static XYZ FindIntersection(Line line1, Line line2)
         {
