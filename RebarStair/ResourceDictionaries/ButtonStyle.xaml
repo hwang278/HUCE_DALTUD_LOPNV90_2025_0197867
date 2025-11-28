@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="ButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#002A5C"/>
+        <Setter Property="Background" Value="#90c8cb"/>
         <!-- Xanh R0 G42 B92 -->
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="10 6"/>
@@ -28,13 +28,13 @@
                                             Duration="0:0:0.2"/>
                             <ColorAnimation Storyboard.TargetName="contentPresenter"
                                             Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
-                                            To="#002A5C"
+                                            To="#90c8cb"
                                             Duration="0:0:0.2"/>
                         </Storyboard>
                         <Storyboard x:Key="HoverOff">
                             <ColorAnimation Storyboard.TargetName="border"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="#002A5C"
+                                            To="#90c8cb"
                                             Duration="0:0:0.2"/>
                             <ColorAnimation Storyboard.TargetName="contentPresenter"
                                             Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
