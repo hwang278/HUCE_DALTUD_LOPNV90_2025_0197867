@@ -209,7 +209,7 @@
             <Button Width="110" Height="30" Content="Pick WorkPlane"
                     Margin="0,0,10,0" Command="{Binding PickWorkPlaneCommand}" />
             <Button Width="86" Height="30" Content="Vẽ Thép"
-            Margin="0,0,10,0" />
+            Margin="0,0,10,0" Command="{Binding OkCommand}" />
             <Button Width="86" Height="30" Content="Quit"/>
         </StackPanel>
     </StackPanel>

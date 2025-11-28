@@ -6,7 +6,9 @@ using RebarStair.RebarStair.ViewModel;
 
 
 namespace RebarStair.RebarStair
+
 {
+    
     [Transaction(TransactionMode.Manual)]
     public class RebarStairCmd : IExternalCommand
     {
@@ -21,7 +23,16 @@ namespace RebarStair.RebarStair
                 DataContext = vm
             };
             vm.RebarStairView = view;
-          view.ShowDialog();
+            vm.CurrentWindow = view;
+            vm.ShowWindowAgain = () =>
+            {
+                view.Dispatcher.Invoke(() =>
+                {
+                    view.Show();
+                    view.Activate();
+                });
+            };
+            view.ShowDialog();
 
             return Result.Succeeded;
         }
