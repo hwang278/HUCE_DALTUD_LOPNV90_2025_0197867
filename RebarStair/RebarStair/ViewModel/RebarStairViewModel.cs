@@ -774,7 +774,7 @@ namespace RebarStair.RebarStair.ViewModel
             var linetemp2 = Line.CreateBound(P11t2, P10_temp);
             var P11 = FindIntersection(linetemp1, linetemp2);
             var plane10 = Plane.CreateByNormalAndOrigin(-XYZ.BasisZ, P5);
-            var P10 = Utils.PlaneUtils.ExtendLineToPlane(linetemp2, plane10);
+            var P10 = helpers.PlaneUtils.ExtendLineToPlane(linetemp2, plane10);
             var P9 = P10 + vecX * F1.MmToFeet();
             var line1 = Line.CreateBound(P2, P3);
             var line2 = Line.CreateBound(P3, P4);
@@ -860,7 +860,7 @@ namespace RebarStair.RebarStair.ViewModel
             Line line78 = Line.CreateBound(P7, P8);
             Line line90 = Line.CreateBound(P9t, P10t);
             XYZ P8F = FindIntersection(line78, line90);
-            XYZ P7Ex = Utils.PlaneUtils.ExtendLineToPlane(line78, plane4);
+            XYZ P7Ex = helpers.PlaneUtils.ExtendLineToPlane(line78, plane4);
             var P71 = P7Ex + vecX * 180.MmToFeet();
             var P7neo1 = P71 - XYZ.BasisZ * DoDaiNeo.MmToFeet();
             Line line9neo1 = Line.CreateBound(P7neo1, P71);

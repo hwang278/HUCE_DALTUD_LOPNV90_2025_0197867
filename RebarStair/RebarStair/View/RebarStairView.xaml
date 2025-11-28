@@ -10,6 +10,31 @@
         d:DataContext="{d:DesignInstance viewModel:RebarStairViewModel, IsDesignTimeCreatable = True}"
         ResizeMode="NoResize"
         Title="RebarStair" Height="675" Width="1400">
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="C:\Users\Huyho\Source\Repos\Nhom5-DALTUDTXD-LOPNV90\RebarStair\ResourceDictionaries\StyleCustom.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+                <Setter Property="Height" Value="28"/>
+
+            </Style>
+            <Style TargetType="RadioButton"
+                   BasedOn="{StaticResource ResourceKey=RadioButton}" />
+            <Style TargetType="TextBox"
+                   BasedOn="{StaticResource ResourceKey=TextBoxStyle}">
+            </Style>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=TextStyle}" />
+            <Style TargetType="GroupBox" BasedOn="{StaticResource GroupBoxStyle}"></Style>
+
+        </ResourceDictionary>
+
+    </Window.Resources>
     <StackPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -26,11 +51,11 @@
                 <StackPanel>
                     <GroupBox Header="Cầu thang" FontSize="16" FontWeight="Bold" Margin="5 5 5 0" Height="290" >
                         <StackPanel>
-                            <Label Content="Bề rộng thang (mm)" FontSize="13"/>
+                            <TextBlock Text="Bề rộng thang (mm)" FontSize="13"/>
                             <TextBox Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="27"/>
-                            <Label Content="Bề rộng chiếu nghỉ (mm)" FontSize="13"/>
+                            <TextBlock Text="Bề rộng chiếu nghỉ (mm)" FontSize="13"/>
                             <TextBox Margin="0,5,0,10" Height="27" FontSize="13" FontWeight="Regular"/>
-                            <Label Content="Loại cầu thang" FontSize="13"/>
+                            <TextBlock Text="Loại cầu thang" FontSize="13"/>
                             <ComboBox Name="StairType" Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="26" ItemsSource="{Binding StairType}"
                                       SelectedItem="{Binding SelectedType, Mode=TwoWay}"
                                       DisplayMemberPath="Name"/>
@@ -111,17 +136,17 @@
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Vươn Của Thép (A) "  Height="16" Margin="5,0,0,0" FontSize="13"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-                        <TextBlock Grid.Row="1" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" Height="25" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text=" Độ Dài Neo (A1) " Height="16" Margin="5,0,0,0" FontSize="13"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-                        <TextBlock Grid.Row="2" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" Height="25" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="2" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
                         <TextBlock Grid.Row="3" Grid.Column="0" Text=" F1 =" Height="16" Margin="5,0,0,0" FontSize="13"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90"  HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-                        <TextBlock Grid.Row="3" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="90" Height="25"  HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Row="3" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
                         <TextBlock Grid.Row="4" Grid.Column="0" Text=" F2 =" Height="16" Margin="5,0,0,0" FontSize="13"/>
                         <TextBox Grid.Row="4" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,14,0,8" Height="28" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-                        <TextBlock Grid.Row="4" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                        <TextBlock Grid.Row="4" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
                         <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="Dữ liệu cầu thang"  FontSize="13" VerticalAlignment="Top" FontWeight="Bold" Margin="75,20,0,0"/>
                     </Grid>
                 </TabItem>
@@ -193,12 +218,12 @@
                         <ColumnDefinition Width="43"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="B Dầm =" Margin="5,17,0,5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Height="16" FontSize="13" Text="B Dầm =" Margin="5,17,0,5"/>
                     <TextBox Grid.Row="0" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="120" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-                    <TextBlock Grid.Row="0" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="H Dầm =" Margin="5,17,0,5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Height="16" FontSize="13" Text="H Dầm =" Margin="5,17,0,5"/>
                     <TextBox Grid.Row="1" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,11,0,11" Width="120" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-                    <TextBlock Grid.Row="1" Grid.Column="3" Text="mm" Margin="5,0,0,0" Height="16"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
                 </Grid>
             </GroupBox>
         </Grid>
