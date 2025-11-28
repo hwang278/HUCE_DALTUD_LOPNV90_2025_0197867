@@ -16,14 +16,14 @@
                             Width="18" Height="18"
                             CornerRadius="9"
                             BorderThickness="2"
-                            BorderBrush="#002A5C"
+                            BorderBrush="#90c8cb"
                             Background="White"
                             Margin="0,0,6,0">
 
                             <!-- Chấm ở giữa -->
                             <Ellipse x:Name="dot"
                                  Width="10" Height="10"
-                                 Fill="#002A5C"
+                                 Fill="#90c8cb"
                                  Opacity="0"/>
                         </Border>
 
