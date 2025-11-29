@@ -5,7 +5,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="5,2"/>
         <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="BorderBrush" Value="#002A5C"/>
+        <Setter Property="BorderBrush" Value="#90c8cb"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="FontFamily" Value="Arial"/>
@@ -17,7 +17,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10"
+                            CornerRadius="6"
                             Padding="{TemplateBinding Padding}">
                         <!-- Nội dung (chữ) -->
                         <ScrollViewer x:Name="PART_ContentHost"
