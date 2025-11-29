@@ -15,8 +15,7 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="C:\Users\Huyho\Source\Repos\Nhom5-DALTUDTXD-LOPNV90\RebarStair\ResourceDictionaries\StyleCustom.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ResourceDictionaries/StyleCustom.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="Button"
@@ -232,7 +231,7 @@
             HorizontalAlignment="Right"
             Margin="0,10,35,10">
             <Button Width="110" Height="30" Content="Pick WorkPlane"
-                    Margin="0,0,10,0" Command="{Binding PickWorkPlaneCommand}" />
+                    Margin="0,0,10,0" Command="{Binding  PickWorkPlaneCommand}" />
             <Button Width="86" Height="30" Content="Vẽ Thép"
             Margin="0,0,10,0" Command="{Binding OkCommand}" />
             <Button Width="86" Height="30" Content="Quit"/>
