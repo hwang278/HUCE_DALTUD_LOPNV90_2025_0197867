@@ -6,7 +6,5 @@
         <ResourceDictionary Source="RadioButton.xaml" />
         <ResourceDictionary Source="TextStyle.xaml" />
         <ResourceDictionary Source="GroupBoxStyle.xaml" />
-
-        
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
