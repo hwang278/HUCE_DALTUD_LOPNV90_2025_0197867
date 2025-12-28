@@ -23,6 +23,7 @@ namespace RebarStair.RebarStair.Model
         public XYZ P12 { get; set; }
 
         public Element Stair { get; set; }
+        //them list id thang 
         public StairModel(Element stair)
         {
             Stair = stair;

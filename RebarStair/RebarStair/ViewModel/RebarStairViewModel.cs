@@ -27,7 +27,7 @@ namespace RebarStair.RebarStair.ViewModel
     {
        
         public RebarStairView RebarStairView { get; set; }
-        public List<StairType> StairType { get; set; }
+        public List<StairType> StairType { get; set; } //= ClassBienToanCuc.StairModels;
         public StairModel StairModel { get; set; }
 
         public StairType SelectedType
@@ -278,7 +278,9 @@ namespace RebarStair.RebarStair.ViewModel
             this.uiApp = uiApp;
             this.doc = doc;
             this.uiDoc = uiDoc;
+            
             GetData();
+            
             StairType = new List<StairType>
             {
                 new StairType
@@ -330,6 +332,11 @@ namespace RebarStair.RebarStair.ViewModel
             {
                 CurrentWindow?.Hide();
                 PickWorkPlaneEvent.Raise();
+            });
+            OkCommand = new RelayCommand(() =>
+            {
+                CurrentWindow?.Hide();
+                runRebarEvent?.Raise();
             });
 
             runRebarHandler = new RunRebarHandler { ViewModel = this };
@@ -658,6 +665,10 @@ namespace RebarStair.RebarStair.ViewModel
                 true,
                 true
             );
+            RebarParameterSetter.SetRebarParameters(rebar1, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar2, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar3, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar45, StairModel.Stair);
         }
 
         void CreateStirrupT1()
@@ -730,6 +741,8 @@ namespace RebarStair.RebarStair.ViewModel
                 true,
                 true
             );
+            RebarParameterSetter.SetRebarParameters(rebar1, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar2, StairModel.Stair);
         }
 
         void CreateRebarT3()
@@ -959,7 +972,12 @@ namespace RebarStair.RebarStair.ViewModel
                 true,
                 true
             );
-  
+            RebarParameterSetter.SetRebarParameters(rebar1, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar2, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar3, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar4, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar5, StairModel.Stair);
+
         }
 
         void CreateStirrupT3()
@@ -1147,6 +1165,12 @@ namespace RebarStair.RebarStair.ViewModel
                 true,
                 true
             );
+            RebarParameterSetter.SetRebarParameters(rebar1, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar2, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar3, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar4, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar5, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar6, StairModel.Stair);
 
         }
 
@@ -1218,6 +1242,8 @@ namespace RebarStair.RebarStair.ViewModel
                 true,
                 true
             );
+            RebarParameterSetter.SetRebarParameters(rebar1, StairModel.Stair);
+            RebarParameterSetter.SetRebarParameters(rebar2, StairModel.Stair);
 
         }
 

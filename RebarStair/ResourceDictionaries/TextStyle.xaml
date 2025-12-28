@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="TextStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="light"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Margin" Value="5 10 5 5"/>
     </Style>

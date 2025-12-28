@@ -9,6 +9,7 @@
 		<NuGetAuditMode>all</NuGetAuditMode> 
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Images\1172573_imresizer.jpg" />
 	  <None Remove="Images\Chieunghi.png" />
 	  <None Remove="Images\icon.png" />
 	  <None Remove="Images\newtype1.png" />
@@ -31,6 +32,9 @@
 	  <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="Images\1172573_imresizer.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Images\Chieunghi.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
