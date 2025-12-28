@@ -1,17 +1,16 @@
 ﻿using Autodesk.Revit.DB;
+using RebarStair.RebarStair.ViewModel;
 
 namespace RebarStair.helpers
 {
     public static class RebarParameterSetter
     {
-        /// <summary>
-        /// Gán HostMark và Partition cho Rebar
-        /// </summary>
+        
         public static void SetRebarParameters(Autodesk.Revit.DB.Structure.Rebar rebar, Element host)
         {
             if (rebar == null || host == null) return;
 
-            // Lấy HostMark từ host (Stair hoặc FamilyInstance...)
+           
             string hostMark = host.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)?.AsString();
 
             if (!string.IsNullOrEmpty(hostMark))
@@ -26,6 +25,30 @@ namespace RebarStair.helpers
                 {
                     partitionParam.Set(hostMark);
                 }
+            }
+        }
+        public static void SetPartition(
+            Autodesk.Revit.DB.Structure.Rebar rebar,
+            RebarTypeGroup typeGroup,
+            int index)
+        {
+            if (rebar == null) return;
+
+            if (!RebarPartitionManager.PartitionMap.ContainsKey(typeGroup))
+                return;
+
+            var list = RebarPartitionManager.PartitionMap[typeGroup];
+
+            if (index < 0 || index >= list.Count)
+                return;
+
+            string partitionName = list[index];
+
+            Parameter p = rebar.LookupParameter("Partition");
+
+            if (p != null && !p.IsReadOnly)
+            {
+                p.Set(partitionName);
             }
         }
     }
