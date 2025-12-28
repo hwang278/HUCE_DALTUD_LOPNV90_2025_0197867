@@ -15,7 +15,7 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ResourceDictionaries/StyleCustom.xaml" />
+                <ResourceDictionary Source="C:\Users\Huyho\source\repos\Nhom5-DALTUDTXD-LOPNV90\RebarStair\ResourceDictionaries\StyleCustom.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="Button"
@@ -29,6 +29,7 @@
                    BasedOn="{StaticResource ResourceKey=TextBoxStyle}">
             </Style>
             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=TextStyle}" />
+            <Style TargetType="TabControl" BasedOn="{StaticResource TabControlStyle }" />
             <Style TargetType="GroupBox" BasedOn="{StaticResource GroupBoxStyle}"></Style>
 
         </ResourceDictionary>
@@ -107,9 +108,9 @@
                                 <RowDefinition Height="35"/>
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Đường kính" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách" FontSize="13" FontWeight="Bold" Margin="2 10 0 0" />
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Lớp bảo vệ" FontSize="13" FontWeight="Bold" Margin="2 10 0 0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Đường kính" FontSize="13"  Margin="2 10 0 0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách" FontSize="13"  Margin="2 10 0 0" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Lớp bảo vệ" FontSize="13"  Margin="2 10 0 0"/>
                             <ComboBox ItemsSource="{Binding DuongKinhThep}" FontSize="13" FontWeight="Regular" SelectedItem="{Binding SelectedRebarOption.DuongKinh}" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
                             <TextBox  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                             <TextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
@@ -146,7 +147,7 @@
                         <TextBlock Grid.Row="4" Grid.Column="0" Text=" F2 =" Height="16" Margin="5,0,0,0" FontSize="13"/>
                         <TextBox Grid.Row="4" Grid.Column="1" FontSize="13" FontWeight="Regular" Margin="0,14,0,8" Height="28" Width="90" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
                         <TextBlock Grid.Row="4" Grid.Column="3" FontSize="13"  Text="mm" VerticalAlignment="Center" Margin="5,0,0,0" Height="16"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="Dữ liệu cầu thang"  FontSize="13" VerticalAlignment="Top" FontWeight="Bold" Margin="75,20,0,0"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="Dữ liệu cầu thang"  FontSize="13" VerticalAlignment="Top"  Margin="75,20,0,0"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Neo chiếu nghỉ" FontSize="16" FontWeight="Bold">
