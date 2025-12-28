@@ -9,47 +9,59 @@ using System.Threading.Tasks;
 
 namespace RebarStair.RebarStair.Model
 {
-   public  class RebarOption: INotifyPropertyChanged
+    public class RebarOptions : INotifyPropertyChanged
     {
-        private int _optionId;
-        private RebarBarType _duongKinh;
-        public event PropertyChangedEventHandler? PropertyChanged;
-
+        private int optionId;
         public int OptionId
         {
-            get => _optionId;
+            get => optionId;
             set
             {
-                if (value == _optionId) return;
-                _optionId = value;
-                OnPropertyChanged();
+                if (optionId != value)
+                {
+                    optionId = value;
+                    OnPropertyChanged(nameof(OptionId));
+                }
             }
         }
 
+        private RebarBarType duongKinh;
         public RebarBarType DuongKinh
         {
-            get => _duongKinh;
+            get => duongKinh;
             set
             {
-                if (Equals(value, _duongKinh)) return;
-                _duongKinh = value;
-                OnPropertyChanged();
+                if (duongKinh != value)
+                {
+                    duongKinh = value;
+                    OnPropertyChanged(nameof(DuongKinh));
+                }
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        private bool _isChecked;
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set
+            {
+                if (_isChecked != value)
+                {
+                    _isChecked = value;
+                    OnPropertyChanged(nameof(IsChecked));
+                    if (value)
+                        Selected?.Invoke(this);
+                }
+            }
+        }
+
+        public static event Action<RebarOptions> Selected;
         public string Name { get; set; }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
     }
 }

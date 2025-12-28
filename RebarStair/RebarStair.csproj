@@ -20,9 +20,9 @@
 	  <None Remove="Images\typ1s2.png" />
 	  <None Remove="Images\typ2s1.png" />
 	  <None Remove="Images\typ2s2.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="RebarStair\ViewModel\" />
+	  <None Remove="Images\typ3s1.png" />
+	  <None Remove="Images\typ3s2.png" />
+	  <None Remove="Images\Type2%281%29.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Rebar.csproj" />
@@ -61,6 +61,15 @@
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Images\typ2s2.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\typ3s1.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\typ3s2.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\Type2(1).png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	</ItemGroup>
