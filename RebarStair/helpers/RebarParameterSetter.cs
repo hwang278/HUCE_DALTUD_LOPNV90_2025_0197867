@@ -1,54 +1,44 @@
-﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Structure;
 using RebarStair.RebarStair.ViewModel;
+
 
 namespace RebarStair.helpers
 {
     public static class RebarParameterSetter
     {
-        
-        public static void SetRebarParameters(Autodesk.Revit.DB.Structure.Rebar rebar, Element host)
-        {
-            if (rebar == null || host == null) return;
-
-           
-            string hostMark = host.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)?.AsString();
-
-            if (!string.IsNullOrEmpty(hostMark))
-            {
-               
-                var markParam = rebar.get_Parameter(BuiltInParameter.ALL_MODEL_MARK);
-                markParam?.Set(hostMark);
-
-             
-                var partitionParam = rebar.get_Parameter(BuiltInParameter.NUMBER_PARTITION_PARAM);
-                if (partitionParam != null && !partitionParam.IsReadOnly)
-                {
-                    partitionParam.Set(hostMark);
-                }
-            }
-        }
-        public static void SetPartition(
-            Autodesk.Revit.DB.Structure.Rebar rebar,
+        public static void SetRebarParameters(
+            Element host,
             RebarTypeGroup typeGroup,
-            int index)
+            int startIndex,
+            params Autodesk.Revit.DB.Structure.Rebar[] rebars)
         {
-            if (rebar == null) return;
+            ArgumentNullException.ThrowIfNull(host);
+            ArgumentNullException.ThrowIfNull(rebars);
 
-            if (!RebarPartitionManager.PartitionMap.ContainsKey(typeGroup))
-                return;
+            var partitionCount = RebarPartitionManager.GetPartitionCount(typeGroup);
+            if (startIndex < 0 || startIndex + rebars.Length > partitionCount)
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
 
-            var list = RebarPartitionManager.PartitionMap[typeGroup];
+            var uniqueIds = new HashSet<ElementId>();
+            var hostMark = host.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)?.AsString();
 
-            if (index < 0 || index >= list.Count)
-                return;
-
-            string partitionName = list[index];
-
-            Parameter p = rebar.LookupParameter("Partition");
-
-            if (p != null && !p.IsReadOnly)
+            for (var index = 0; index < rebars.Length; index++)
             {
-                p.Set(partitionName);
+                var rebar = rebars[index]
+                    ?? throw new ArgumentException("Rebar collection cannot contain null values.", nameof(rebars));
+
+                if (!uniqueIds.Add(rebar.Id))
+                    throw new ArgumentException("Each partition must target a different rebar.", nameof(rebars));
+
+                if (!string.IsNullOrEmpty(hostMark))
+                    rebar.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)?.Set(hostMark);
+
+                var partition = rebar.get_Parameter(BuiltInParameter.NUMBER_PARTITION_PARAM);
+                if (partition != null && !partition.IsReadOnly)
+                {
+                    partition.Set(RebarPartitionManager.GetPartitionName(typeGroup, startIndex + index));
+                }
             }
         }
     }

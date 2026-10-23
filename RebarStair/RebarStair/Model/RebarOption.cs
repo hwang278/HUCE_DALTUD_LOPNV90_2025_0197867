@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using Autodesk.Revit.DB.Structure;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RebarStair.RebarStair.Model
 {
-    public class RebarOptions : INotifyPropertyChanged
+    public class RebarOption : INotifyPropertyChanged
     {
         private int optionId;
         public int OptionId
@@ -26,7 +21,7 @@ namespace RebarStair.RebarStair.Model
         }
 
         private RebarBarType duongKinh;
-        public RebarBarType DuongKinh
+        public RebarBarType Diameter
         {
             get => duongKinh;
             set
@@ -34,12 +29,19 @@ namespace RebarStair.RebarStair.Model
                 if (duongKinh != value)
                 {
                     duongKinh = value;
+                    OnPropertyChanged(nameof(Diameter));
                     OnPropertyChanged(nameof(DuongKinh));
                 }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public RebarBarType DuongKinh
+        {
+            get => Diameter;
+            set => Diameter = value;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -60,7 +62,7 @@ namespace RebarStair.RebarStair.Model
             }
         }
 
-        public static event Action<RebarOptions> Selected;
+        public event Action<RebarOption>? Selected;
         public string Name { get; set; }
 
     }

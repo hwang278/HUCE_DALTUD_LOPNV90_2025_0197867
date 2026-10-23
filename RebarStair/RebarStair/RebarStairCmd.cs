@@ -16,13 +16,11 @@ namespace RebarStair.RebarStair
         {
             var uiDoc = commandData.Application.ActiveUIDocument;
             var doc = uiDoc.Document;
-            var uiApp = commandData.Application;
-            var vm = new RebarStairViewModel(uiApp, doc, uiDoc);
+            var vm = new RebarStairViewModel(doc, uiDoc);
             var view = new RebarStairView
             {
                 DataContext = vm
             };
-            vm.RebarStairView = view;
             vm.CurrentWindow = view;
             vm.ShowWindowAgain = () =>
             {

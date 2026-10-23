@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType> 
 		<TargetFramework>net8.0-windows</TargetFramework>
@@ -20,8 +20,6 @@
 	  <None Remove="Images\typ1s2.png" />
 	  <None Remove="Images\typ2s1.png" />
 	  <None Remove="Images\typ2s2.png" />
-	  <None Remove="Images\typ3s1.png" />
-	  <None Remove="Images\typ3s2.png" />
 	  <None Remove="Images\Type2%281%29.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -63,14 +61,11 @@
 	  <Resource Include="Images\typ2s2.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
-	  <Resource Include="Images\typ3s1.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\typ3s2.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
 	  <Resource Include="Images\Type2(1).png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	</ItemGroup>
+	<Target Name="DeployAddin" AfterTargets="AfterBuild">
+		<Copy SourceFiles="$(ProjectDir)RebarStairAddin.addin" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\2026" SkipUnchangedFiles="true" />
+	</Target>
 </Project>

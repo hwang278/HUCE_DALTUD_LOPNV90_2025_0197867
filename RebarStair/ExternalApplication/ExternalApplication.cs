@@ -1,4 +1,4 @@
-﻿using Autodesk.Revit.UI;
+using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +28,16 @@ namespace RebarStair.ExternalApplication
             //Create The Plugin Button.
             PushButtonData Button4 = new PushButtonData("btn_Loc1", "Stair Rebar", assembly.Location, "RebarStair.RebarStair.RebarStairCmd");
             
-            // Sử dụng đường dẫn embedded resource
-            string iconPath = "C:\\Users\\Huyho\\Source\\Repos\\Nhom5-DALTUDTXD-LOPNV90\\RebarStair\\Images\\1172573_imresizer.jpg"; 
-            Button4.LargeImage = new BitmapImage(new Uri(iconPath));
-            Button4.Image = new BitmapImage(new Uri(iconPath)); 
+            try
+            {
+                var iconUri = new Uri("pack://application:,,,/RebarStair;component/Images/icon.png", UriKind.Absolute);
+                Button4.LargeImage = new BitmapImage(iconUri);
+                Button4.Image = new BitmapImage(iconUri);
+            }
+            catch
+            {
+                // Ignore missing icon gracefully without crashing startup
+            } 
 
             PushButton pushButton4 = Panel.AddItem(Button4) as PushButton;
             return Result.Succeeded;

@@ -56,7 +56,7 @@
                             <TextBlock Text="Bề rộng chiếu nghỉ (mm)" FontSize="13"/>
                             <TextBox Margin="0,5,0,10" Height="27" FontSize="13" FontWeight="Regular" Text="{Binding D}"/>
                             <TextBlock Text="Loại cầu thang" FontSize="13"/>
-                            <ComboBox Name="StairType" Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="26" ItemsSource="{Binding StairType}"
+                            <ComboBox Name="StairType" Margin="0,5,0,10" FontSize="13" FontWeight="Regular" Height="26" ItemsSource="{Binding StairTypes}"
                                       SelectedItem="{Binding SelectedType, Mode=TwoWay}"
                                       DisplayMemberPath="Name"/>
                         </StackPanel>
@@ -75,7 +75,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ItemsControl ItemsSource="{Binding RebarOptionList}">
+                            <ItemsControl ItemsSource="{Binding RebarOptions}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <UniformGrid Rows="0" Columns="0"/>
@@ -111,7 +111,7 @@
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Đường kính" FontSize="13"  Margin="2 10 0 0"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách" FontSize="13"  Margin="2 10 0 0" />
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Lớp bảo vệ" FontSize="13"  Margin="2 10 0 0"/>
-                            <ComboBox ItemsSource="{Binding DuongKinhThep}" FontSize="13" FontWeight="Regular" SelectedItem="{Binding SelectedRebarOption.DuongKinh}" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
+                            <ComboBox ItemsSource="{Binding RebarBarTypes}" FontSize="13" FontWeight="Regular" SelectedItem="{Binding SelectedRebarOption.DuongKinh}" Grid.Row="0" Grid.Column="2"  Height="28" Margin="2" DisplayMemberPath="Name"/>
                             <TextBox  Grid.Row="1" Text="{Binding KhoangCach}" Grid.Column="2" Grid.ColumnSpan="3" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                             <TextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Text="{Binding Cover}" Height="28" FontSize="13" FontWeight="Regular" Margin="2"/>
                         </Grid>
@@ -235,7 +235,7 @@
                     Margin="0,0,10,0" Command="{Binding  PickWorkPlaneCommand}" />
             <Button Width="86" Height="30" Content="Vẽ Thép"
             Margin="0,0,10,0" Command="{Binding OkCommand}" />
-            <Button Width="86" Height="30" Content="Quit"/>
+            <Button Width="86" Height="30" Content="Quit" Command="{Binding CloseCommand}"/>
         </StackPanel>
     </StackPanel>
 </Window>
