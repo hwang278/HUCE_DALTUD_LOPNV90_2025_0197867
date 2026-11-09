@@ -3,7 +3,7 @@
 
 	<AddIn Type="Application">
 		<Name>RebarStair</Name>
-		<Assembly>C:\Work\HUCE_DALTUD_LOPNV90_2025_0197867\RebarStair\bin\Debug\net8.0-windows\RebarStair.dll</Assembly>
+		<Assembly>C:\Work\HUCE_DALTUD_LOPNV90_2025_0197867\RebarStair\bin\Debug\net10.0-windows\RebarStair.dll</Assembly>
 		<AddInId>DD3F7C13-6348-4DC3-A8C7-DFDF82937098</AddInId>
 		<FullClassName>RebarStair.ExternalApplication.ExternalApplication</FullClassName>
 		<Description>This is a Plugin</Description>

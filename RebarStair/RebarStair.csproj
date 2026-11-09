@@ -1,71 +1,43 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType> 
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<RevitInstallDir Condition="'$(RevitInstallDir)' == ''">C:\Program Files\Autodesk\Revit 2026</RevitInstallDir>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<NuGetAuditMode>all</NuGetAuditMode> 
+		<!-- Revit 2026.5 host binaries reference facade versions different from the public net10 reference pack. -->
+		<MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3277</MSBuildWarningsAsMessages>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Images\1172573_imresizer.jpg" />
-	  <None Remove="Images\Chieunghi.png" />
 	  <None Remove="Images\icon.png" />
-	  <None Remove="Images\newtype1.png" />
-	  <None Remove="Images\newtype2.png" />
-	  <None Remove="Images\pallet.png" />
-	  <None Remove="Images\PalletColour.png" />
-	  <None Remove="Images\typ1s1.png" />
-	  <None Remove="Images\typ1s2.png" />
-	  <None Remove="Images\typ2s1.png" />
-	  <None Remove="Images\typ2s2.png" />
-	  <None Remove="Images\Type2%281%29.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Rebar.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-	  <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2026.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Resource Include="Images\1172573_imresizer.jpg">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\Chieunghi.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
+	  <Reference Include="RevitAPI" HintPath="$(RevitInstallDir)\RevitAPI.dll" Private="false" />
+	  <Reference Include="RevitAPIUI" HintPath="$(RevitInstallDir)\RevitAPIUI.dll" Private="false" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Resource Include="Images\icon.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\newtype1.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\newtype2.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\pallet.png" />
-	  <Resource Include="Images\PalletColour.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\typ1s1.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\typ1s2.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\typ2s1.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\typ2s2.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\Type2(1).png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	</ItemGroup>
 	<Target Name="DeployAddin" AfterTargets="AfterBuild">
 		<Copy SourceFiles="$(ProjectDir)RebarStairAddin.addin" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\2026" SkipUnchangedFiles="true" />
+	</Target>
+	<Target Name="ExcludeRevitHostAssembliesFromOutput" AfterTargets="ResolveAssemblyReferences">
+		<ItemGroup>
+			<ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)"
+				Condition="'%(Filename)' == 'RevitAPI' Or '%(Filename)' == 'RevitAPIUI' Or '%(Filename)' == 'UIFramework' Or '%(Filename)' == 'AdWindows'" />
+		</ItemGroup>
 	</Target>
 </Project>

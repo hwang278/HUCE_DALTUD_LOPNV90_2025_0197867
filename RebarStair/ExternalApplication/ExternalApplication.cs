@@ -39,7 +39,7 @@ namespace RebarStair.ExternalApplication
                 // Ignore missing icon gracefully without crashing startup
             } 
 
-            PushButton pushButton4 = Panel.AddItem(Button4) as PushButton;
+            _ = Panel.AddItem(Button4);
             return Result.Succeeded;
         }
     }

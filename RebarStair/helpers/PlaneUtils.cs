@@ -26,9 +26,9 @@ namespace RebarStair.helpers
             // Tính khoảng cách từ điểm đến mặt phẳng theo pháp tuyến
             double denominator = direction.DotProduct(plane.Normal);
 
-            // Nếu vuông góc (không cắt), trả về null
+            // A required construction line without an intersection cannot produce valid rebar geometry.
             if (Math.Abs(denominator) < 1e-9)
-                return null;
+                throw new InvalidOperationException("Đường thẳng song song với mặt phẳng, không thể dựng hình học thép.");
 
             double t = -vector.DotProduct(plane.Normal) / denominator;
 
