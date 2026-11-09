@@ -5,13 +5,14 @@ using Autodesk.Revit.UI.Selection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Rebar.RebarStair.View;
+using RebarStair.RebarStair.ExternalEvents;
 using RebarStair.RebarStair.Model;
-using RebarStair.RebarStair.Services;
 using RebarStair.helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Window = System.Windows.Window;
+using RebarStair.Filter;
 
 
 namespace RebarStair.RebarStair.ViewModel
@@ -19,8 +20,8 @@ namespace RebarStair.RebarStair.ViewModel
     public partial class RebarStairViewModel : ObservableObject
     {
        
-        public List<StairType> StairTypes { get; }
-        public StairModel StairModel { get; }
+        public List<StairType> StairTypes { get; set; }
+        public StairModel StairModel { get; set; }
 
         public StairType SelectedType
         {
@@ -30,43 +31,30 @@ namespace RebarStair.RebarStair.ViewModel
                 if (Equals(value, _selectedType)) return;
                 _selectedType = value;
                 OnPropertyChanged();
-                HasPreview = false;
-                UpdateSection();
             }
         }
         private StairType _selectedType;
-        private readonly RebarStairServices _services;
-        private List<ElementId> _previewRebarIds = [];
-        private RebarPlacementService? _placement;
-        private bool _hasPreview;
+        public List<RebarBarType> RebarBarTypes { get; set; }
 
-        public object? PreviewContent => _services.Preview.Content;
-        public bool IsAccepted { get; private set; }
-        internal bool IsPreviewRequested { get; private set; }
-        internal bool IsWorkPlaneRequested { get; private set; }
-        public bool HasPreview
-        {
-            get => _hasPreview;
-            private set
-            {
-                if (_hasPreview == value) return;
-                _hasPreview = value;
-                OnPropertyChanged();
-            }
-        }
-        public List<RebarBarType> RebarBarTypes { get; }
+        public RelayCommand OkCommand { get; set; }
 
-        public RelayCommand OkCommand { get; }
-        public RelayCommand PreviewCommand { get; }
+        public RelayCommand CloseCommand { get; set; }
 
-        public RelayCommand CloseCommand { get; }
-
-        public Window? CurrentWindow { get; set; }
+        public Window CurrentWindow { get; set; }
         private readonly Document _document;
 
-        public RelayCommand PickWorkPlaneCommand { get; }
+        private readonly UIDocument _uiDocument;
+        public ExternalEvent PickWorkPlaneEvent { get; set; }
 
-        public List<RebarOption> RebarOptions { get; }
+        private readonly ExternalEvent _runRebarEvent;
+
+        private PickWorkPlaneHandler _pickWorkPlaneHandler;
+        public Action ShowWindowAgain { get; set; }
+        public RelayCommand PickWorkPlaneCommand { get; set; }
+
+        private readonly RunRebarHandler _runRebarHandler;
+
+        public List<RebarOption> RebarOptions { get; set; }
 
         private RebarOption _selectedRebarOption;
 
@@ -79,7 +67,6 @@ namespace RebarStair.RebarStair.ViewModel
                 {
                     _selectedRebarOption = value;
                     OnPropertyChanged(nameof(SelectedRebarOption));
-                    ApplyRebarHighlight();
                 }
             }
         }
@@ -99,7 +86,6 @@ namespace RebarStair.RebarStair.ViewModel
                 _khoangCach = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(Spacing));
-                HasPreview = false;
             }
         }
 
@@ -111,7 +97,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_cover)) return;
                 _cover = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
         public double R1
@@ -122,7 +107,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_r1)) return;
                 _r1 = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
         public double F1
@@ -133,7 +117,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_f1)) return;
                 _f1 = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
         public double L1CN
@@ -144,7 +127,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_l1Cn)) return;
                 _l1Cn = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
 
@@ -156,7 +138,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_l2Cn)) return;
                 _l2Cn = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
         public double F2
@@ -167,7 +148,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_f2)) return;
                 _f2 = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
 
@@ -188,7 +168,6 @@ namespace RebarStair.RebarStair.ViewModel
                 _bDam = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(BeamWidth));
-                HasPreview = false;
             }
         }
 
@@ -207,7 +186,6 @@ namespace RebarStair.RebarStair.ViewModel
                 _hDam = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(BeamHeight));
-                HasPreview = false;
             }
         }
 
@@ -219,7 +197,6 @@ namespace RebarStair.RebarStair.ViewModel
                 if (value.Equals(_d)) return;
                 _d = value;
                 OnPropertyChanged();
-                HasPreview = false;
             }
         }
 
@@ -238,7 +215,6 @@ namespace RebarStair.RebarStair.ViewModel
                 _doDaiNeo = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(AnchorageLength));
-                HasPreview = false;
             }
         }
 
@@ -257,7 +233,6 @@ namespace RebarStair.RebarStair.ViewModel
                 _doVuonCuaThep = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ExtensionLength));
-                HasPreview = false;
             }
         }
         private double _cover = 20;
@@ -281,188 +256,169 @@ namespace RebarStair.RebarStair.ViewModel
         private double _f1 = 300;
 
         private double _f2 = 300;
-        internal RebarStairViewModel(RebarStairServices services, Element stair)
-        {
-            _services = services;
-            _document = services.Document;
-            StairModel = new StairModel(stair);
-            _services.Preview.ContentChanged += (_, _) => OnPropertyChanged(nameof(PreviewContent));
+        public RebarStairViewModel(Document document, UIDocument uiDocument)
+        {   
+            _document = document;
+            _uiDocument = uiDocument;
             
-            RebarBarTypes = LoadRebarBarTypes();
-            if (RebarBarTypes.Count == 0)
-            {
-                throw new InvalidOperationException("Dự án chưa có Rebar Bar Type.");
-            }
+            LoadRebarBarTypes();
             
             StairTypes = new List<StairType>
             {
-                new StairType { Name = "Type1" },
-                new StairType { Name = "Type2" },
-                new StairType { Name = "Type3" },
-                new StairType { Name = "Chiếu Nghỉ" },
+                new StairType
+                {
+                    Name = "Type1", ImagePath = "/RebarStair;component/Images/newtype1.png",
+                    ImagePath1 = "/RebarStair;component/Images/typ1s1.png",
+                    ImagePath2 = "/RebarStair;component/Images/typ1s2.png",
+                    ImagePath3 = "/RebarStair;component/Images/pallet.png"
+                },
+                new StairType
+                {
+                    Name = "Type2", ImagePath = "/RebarStair;component/Images/Type2(1).png",
+                    ImagePath1 = "/RebarStair;component/Images/typ2s1.png",
+                    ImagePath2 = "/RebarStair;component/Images/typ2s2.png",
+                    ImagePath3 = "/RebarStair;component/Images/pallet.png"
+                },
+                new StairType
+                {
+                    Name = "Type3", ImagePath = "/RebarStair;component/Images/newtype2.png",
+                    ImagePath1 = "/RebarStair;component/Images/typ2s1.png",
+                    ImagePath2 = "/RebarStair;component/Images/typ2s2.png",
+                    ImagePath3 = "/RebarStair;component/Images/pallet.png"
+                },
+                new StairType
+                {
+                    Name = "Chiếu Nghỉ", ImagePath = "/RebarStair;component/Images/Chieunghi.png",
+                    ImagePath1 = "/RebarStair;component/Images/Chieunghi.png",
+                    ImagePath2 = "/RebarStair;component/Images/PalletColour.png",
+                    ImagePath3 = "/RebarStair;component/Images/pallet.png"
+                },
             };
-            _selectedType = StairTypes[0];
+            SelectedType = StairTypes.FirstOrDefault();
 
 
             RebarOptions = new List<RebarOption>
             {
-                new(1, "1", FindBarType("D8")),
-                new(2, "2", FindBarType("D10")),
-                new(3, "3", FindBarType("D8")),
-                new(4, "4", FindBarType("D10")),
-                new(5, "5", FindBarType("D6"))
+                new RebarOption
+                    { OptionId = 1, Name = "1", DuongKinh = RebarBarTypes.FirstOrDefault(x => x.Name.Contains("D8")) },
+                new RebarOption
+                    { OptionId = 2, Name = "2", DuongKinh = RebarBarTypes.FirstOrDefault(x => x.Name.Contains("D10")) },
+                new RebarOption
+                    { OptionId = 3, Name = "3", DuongKinh = RebarBarTypes.FirstOrDefault(x => x.Name.Contains("D8")) },
+                new RebarOption
+                    { OptionId = 4, Name = "4", DuongKinh = RebarBarTypes.FirstOrDefault(x => x.Name.Contains("D10")) },
+                new RebarOption
+                    { OptionId = 5, Name = "5", DuongKinh = RebarBarTypes.FirstOrDefault(x => x.Name.Contains("D6")) }
             };
 
-            _selectedRebarOption = RebarOptions[0];
-            _selectedRebarOption.IsChecked = true;
+            var defaultOption = RebarOptions.FirstOrDefault();
+            if (defaultOption != null)
+            {
+                defaultOption.IsChecked = true;
+                SelectedRebarOption = defaultOption;
+            }
 
             foreach (var option in RebarOptions)
             {
                 option.Selected += SelectRebarOption;
-                option.PropertyChanged += (_, args) =>
-                {
-                    if (args.PropertyName is nameof(RebarOption.Diameter) or nameof(RebarOption.DuongKinh))
-                    {
-                        HasPreview = false;
-                    }
-                };
             }
+
+            _pickWorkPlaneHandler = new PickWorkPlaneHandler { UiDoc = uiDocument };
+            _pickWorkPlaneHandler.CallbackAfterPick = _ => { ShowWindowAgain?.Invoke(); };
+
+            PickWorkPlaneEvent = ExternalEvent.Create(_pickWorkPlaneHandler);
 
             PickWorkPlaneCommand = new RelayCommand(() =>
             {
-                IsWorkPlaneRequested = true;
-                CurrentWindow?.Close();
-            });
-            PreviewCommand = new RelayCommand(() =>
-            {
-                IsPreviewRequested = true;
-                CurrentWindow?.Close();
+                CurrentWindow?.Hide();
+                PickWorkPlaneEvent.Raise();
             });
             OkCommand = new RelayCommand(() =>
             {
-                if (!HasPreview)
-                {
-                    _services.Dialogs.ShowInfo("Hãy bố trí và kiểm tra preview thép trước khi xác nhận.");
-                    return;
-                }
-
-                IsAccepted = true;
-                CurrentWindow?.Close();
+                CurrentWindow?.Hide();
+                _runRebarEvent.Raise();
             });
             CloseCommand = new RelayCommand(() => CurrentWindow?.Close());
 
-        }
+            _runRebarHandler = new RunRebarHandler { ViewModel = this };
+            _runRebarEvent = ExternalEvent.Create(_runRebarHandler);
 
-        public void ClearViewport()
-        {
-            _services.Preview.ReleaseContent();
-            OnPropertyChanged(nameof(PreviewContent));
-        }
-
-        internal void AttachWindow(Window window)
-        {
-            CurrentWindow = window;
-            IsPreviewRequested = false;
-            IsWorkPlaneRequested = false;
-            _services.Preview.ResetContent();
-            ApplyRebarHighlight();
         }
 
         private void SelectRebarOption(RebarOption selectedOption)
         {
-            if (_isSyncingSelection) return;
-
-            _isSyncingSelection = true;
-            try
+            foreach (var option in RebarOptions)
             {
-                foreach (var option in RebarOptions)
-                {
-                    option.IsChecked = ReferenceEquals(option, selectedOption);
-                }
+                option.IsChecked = ReferenceEquals(option, selectedOption);
+            }
 
-                SelectedRebarOption = selectedOption;
-            }
-            finally
-            {
-                _isSyncingSelection = false;
-            }
+            SelectedRebarOption = selectedOption;
         }
 
-        /// <summary>Gom các tham số đang bind trên giao diện thành dữ liệu cho service dựng thép.</summary>
-        private RebarParameters BuildRebarParameters() => new()
+        private void LoadRebarBarTypes()
         {
-            Cover = Cover,
-            Spacing = KhoangCach,
-            StairWidth = R1,
-            LandingWidth = D,
-            F1 = F1,
-            F2 = F2,
-            L1 = L1CN,
-            L2 = L2CN,
-            BeamWidth = BDam,
-            BeamHeight = HDam,
-            AnchorageLength = DoDaiNeo,
-            ExtensionLength = DoVuonCuaThep
-        };
-
-        private List<RebarBarType> LoadRebarBarTypes()        {
-            return new FilteredElementCollector(_document).OfClass(typeof(RebarBarType))
+            RebarBarTypes = new FilteredElementCollector(_document).OfClass(typeof(RebarBarType))
                 .Cast<RebarBarType>()
                 .OrderBy(x => x.Name)
                 .ToList();
         }
 
-        private RebarBarType FindBarType(string namePart) => RebarBarTypes
-            .FirstOrDefault(type => type.Name.Contains(namePart, StringComparison.OrdinalIgnoreCase))
-            ?? throw new InvalidOperationException($"Không tìm thấy Rebar Bar Type chứa '{namePart}'.");
-
-        internal void CreateRebarPreview()
+        public void Run()
         {
-            GeometryInspector.LogEvent("Create rebar preview", $"Started for {SelectedType.Name}.");
-            try
-            {
-                _services.Points.Select(StairModel, SelectedType.Name);
+            var reference = _uiDocument.Selection
+                .PickObject(ObjectType.Element, new StairSelectionFilter(), "Select Stair");
 
-                GeometryInspector.LogEvent("Create rebar preview", "Point selection completed.");
+            if (reference == null) return;
 
-                _placement = _services.CreatePlacement(StairModel, BuildRebarParameters(), RebarOptions);
-                _previewRebarIds = _placement.Build(SelectedType.Name, _previewRebarIds).ToList();
+            var stair = _document.GetElement(reference);
+            if (stair == null) return;
 
-                _services.Preview.ShowRebars(_previewRebarIds);
-                HasPreview = _previewRebarIds.Count > 0;
-                ApplyRebarHighlight();
-                GeometryInspector.LogEvent(
-                    "Create rebar preview",
-                    $"Completed with {_previewRebarIds.Count} rebar elements.");
-            }
-            catch (Autodesk.Revit.Exceptions.OperationCanceledException)
-            {
-                GeometryInspector.LogEvent("Create rebar preview", "Point selection cancelled by user.");
-            }
-            catch (OperationCanceledException)
-            {
-                GeometryInspector.LogEvent("Create rebar preview", "Point validation cancelled the operation.");
-            }
-            catch (Exception exception)
-            {
-                GeometryInspector.LogException("Create rebar preview", exception);
-                _services.Dialogs.ShowError(exception.ToString());
-            }
-        }
+            StairModel = new StairModel(stair);
 
-        internal void PickWorkPlane()
-        {
-            try
+            switch (SelectedType.Name)
             {
-                var planarFace = _services.WorkPlane.PickAndApply();
-                if (planarFace is null) return;
+                case "Type1":
+                    SelectPointsForType1();
+                    break;
+                case "Type2":
+                    SelectPointsForType2();
+                    break;
+                case "Type3":
+                    SelectPointsForType3();
+                    break;
+                case "Chiếu Nghỉ":
+                case "Landing":
+                    SelectPointsForLanding();
+                    break;
 
-                // Mặt cắt 2D lấy theo work plane vừa chọn, lùi vào trong thân thang một đoạn.
-                SetWorkPlaneSection(planarFace);
             }
-            catch (Autodesk.Revit.Exceptions.OperationCanceledException)
+
+            using (var tx = new Transaction(_document, "Create Rebar"))
             {
-            }
+                tx.Start();
+
+                switch (SelectedType.Name)
+                {
+                    case "Type1":
+                        CreateType1Rebar();
+                        CreateType1Stirrups();
+                        break;
+                    case "Type2":
+                        CreateType2Rebar();
+                        CreateType2Stirrups();
+                        break;
+
+                    case "Type3":
+                        CreateType3Rebar();
+                        CreateType3Stirrups();
+                        break;
+                    case "Chiếu Nghỉ":
+                    case "Landing":
+                        CreateLandingRebar();
+                        break;
+                }
+                tx.Commit();
+            }            
         }
     }
 }

@@ -1,20 +1,19 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
 using RebarStair.helpers;
-using RebarStair.RebarStair.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RebarStair.RebarStair.Services
+namespace RebarStair.RebarStair.ViewModel
 {
-    public partial class RebarPlacementService
+    public partial class RebarStairViewModel
     {
         void CreateType2Rebar()
         {
-            var bar1 = GetBarType(1);
-            var bar2 = GetBarType(2);
-            var bar4 = GetBarType(4);
-            var bar5 = GetBarType(5);
+            var bar1 = RebarOptions.FirstOrDefault(x => x.OptionId == 1).DuongKinh;
+            var bar2 = RebarOptions.FirstOrDefault(x => x.OptionId == 2).DuongKinh;
+            var bar4 = RebarOptions.FirstOrDefault(x => x.OptionId == 4).DuongKinh;
+            var bar5 = RebarOptions.FirstOrDefault(x => x.OptionId == 5).DuongKinh;
 
             var kc = KhoangCach.MmToFeet();
             //Thep Duoi
@@ -47,7 +46,20 @@ namespace RebarStair.RebarStair.Services
             var curves = new List<Curve> { line0, line1, line2, line3 };
 
             XYZ normal1 = (P2 - finalP1).CrossProduct(finalP3 - P2).Normalize();
-            var rebar1 = CreateRebar(2, normal1, curves);
+            var rebar1 = Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+                _document,
+                RebarStyle.Standard,
+                bar2,
+                null,
+                null,
+                StairModel.Stair,
+                normal1,
+                curves,
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
             //Thep Tren
             double offsetDistance2 = Cover.MmToFeet() + bar4.BarNominalDiameter / 2;
             XYZ dirX3 = (StairModel.P4 - StairModel.P5).Normalize();
@@ -71,7 +83,20 @@ namespace RebarStair.RebarStair.Services
             Line line6 = Line.CreateBound(P4, P4neo);
             var curves2 = new List<Curve> { line4, line5, line6 };
             XYZ normal2 = (finalP5 - finalP6).CrossProduct(P4 - finalP5).Normalize();
-            var rebar2 = CreateRebar(4, normal2, curves2);
+            var rebar2 = Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+                _document,
+                RebarStyle.Standard,
+                bar4,
+                null,
+                null,
+                StairModel.Stair,
+                normal2,
+                curves2,
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
 
 
             //ThepGiaCuong
@@ -91,7 +116,20 @@ namespace RebarStair.RebarStair.Services
             Line line8 = Line.CreateBound(finalGCP12, finalGCP3);
             Line line9 = Line.CreateBound(finalGCP3, GCP3neo);
             var curves3 = new List<Curve> { line7, line8, line9 };
-            var rebar3 = CreateRebar(5, normal2, curves3);
+            var rebar3 = Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+                _document,
+                RebarStyle.Standard,
+                bar5,
+                null,
+                null,
+                StairModel.Stair,
+                normal2,
+                curves3,
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
             //Vi tri thep
             var finalRebar = new List<Autodesk.Revit.DB.Structure.Rebar>();
             finalRebar.Add(rebar1);
@@ -137,10 +175,10 @@ namespace RebarStair.RebarStair.Services
             var VecZ = (-StairModel.P6 + StairModel.P1).Normalize();
             var VecX = VecZ.CrossProduct(VecY).Normalize();
             var kc = KhoangCach.MmToFeet();
-            var bar1 = GetBarType(1);
-            var bar3 = GetBarType(3);
-            var bar2 = GetBarType(2);
-            var bar4 = GetBarType(4);
+            var bar1 = RebarOptions.FirstOrDefault(x => x.OptionId == 1).DuongKinh;
+            var bar3 = RebarOptions.FirstOrDefault(x => x.OptionId == 3).DuongKinh;
+            var bar2 = RebarOptions.FirstOrDefault(x => x.OptionId == 2).DuongKinh;
+            var bar4 = RebarOptions.FirstOrDefault(x => x.OptionId == 4).DuongKinh;
             var offsetDistance = Cover.MmToFeet() + bar2.BarNominalDiameter + bar1.BarNominalDiameter / 2;
             var w = (StairModel.P6 - StairModel.P1).GetLength();
             XYZ dirX2 = (StairModel.P3 - StairModel.P2).Normalize();
@@ -156,8 +194,34 @@ namespace RebarStair.RebarStair.Services
             var curve = new List<Curve> { line1 };
             var curve1 = new List<Curve> { line2 };
             var normal = -dirX2;
-            var rebar1 = CreateRebar(1, normal, curve);
-            var rebar2 = CreateRebar(3, normal, curve1);
+            var rebar1 = Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+                _document,
+                RebarStyle.Standard,
+                bar1,
+                null,
+                null,
+                StairModel.Stair,
+                normal,
+                curve,
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
+            var rebar2 = Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+                _document,
+                RebarStyle.Standard,
+                bar3,
+                null,
+                null,
+                StairModel.Stair,
+                normal,
+                curve1,
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
 
             var length = (StairModel.P3 - (StairModel.P2 + offsetVec1)).GetLength();
             RebarShapeDrivenAccessor accessor1 = rebar1.GetShapeDrivenAccessor();

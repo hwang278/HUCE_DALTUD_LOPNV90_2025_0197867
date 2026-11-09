@@ -1,18 +1,18 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
 using RebarStair.helpers;
-using RebarStair.RebarStair.Model;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace RebarStair.RebarStair.Services
+namespace RebarStair.RebarStair.ViewModel
 {
-    public partial class RebarPlacementService
+    public partial class RebarStairViewModel
     {
         void CreateLandingRebar()
         {
-            var bar1 = GetBarType(1);
-            var bar2 = GetBarType(2);
-            var bar3 = GetBarType(3);
+            var bar1 = RebarOptions.FirstOrDefault(x => x.OptionId == 1).DuongKinh;
+            var bar2 = RebarOptions.FirstOrDefault(x => x.OptionId == 2).DuongKinh;
+            var bar3 = RebarOptions.FirstOrDefault(x => x.OptionId == 3).DuongKinh;
             var kc = KhoangCach.MmToFeet();
             var vecX = (StairModel.P1 - StairModel.P3).Normalize();
             var vecZ = (StairModel.P2 - StairModel.P1).Normalize();
@@ -30,8 +30,35 @@ namespace RebarStair.RebarStair.Services
             var line1 = Line.CreateBound(P1, P3);
             var line2 = Line.CreateBound(P2, P4);
 
-            var rebar1 = CreateRebar(1, vecY, new List<Curve> { line1 });
-            var rebar2 = CreateRebar(2, vecY, new List<Curve> { line2 });
+            var rebar1 =  Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+
+                _document,
+                RebarStyle.Standard,
+                bar1,
+                null,
+                null,
+                StairModel.Stair,
+                vecY,
+                new List<Curve> { line1 },
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
+            var rebar2 = Autodesk.Revit.DB.Structure.Rebar.CreateFromCurves(
+                _document,
+                RebarStyle.Standard,
+                bar2,
+                null,
+                null,
+                StairModel.Stair,
+                vecY,
+                new List<Curve> { line2 },
+                RebarHookOrientation.Left,
+                RebarHookOrientation.Left,
+                false,
+                true
+            );
 
             RebarShapeDrivenAccessor accessor1 = rebar1.GetShapeDrivenAccessor();
             accessor1.SetLayoutAsMaximumSpacing(

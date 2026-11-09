@@ -8,7 +8,7 @@ namespace RebarStair.Filter
     {
         public bool AllowElement(Element elem)
         {
-            return elem is not ElementType && elem.Category?.CategoryType == CategoryType.Model;
+            return elem.Category?.Id.Value is (int)BuiltInCategory.OST_StructuralFraming or (int)BuiltInCategory.OST_Floors or (int)BuiltInCategory.OST_Stairs;
 
         }
 

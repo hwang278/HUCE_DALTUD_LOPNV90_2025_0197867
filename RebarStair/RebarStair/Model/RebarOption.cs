@@ -6,14 +6,19 @@ namespace RebarStair.RebarStair.Model
 {
     public class RebarOption : INotifyPropertyChanged
     {
-        public RebarOption(int optionId, string name, RebarBarType diameter)
+        private int optionId;
+        public int OptionId
         {
-            OptionId = optionId;
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            duongKinh = diameter ?? throw new ArgumentNullException(nameof(diameter));
+            get => optionId;
+            set
+            {
+                if (optionId != value)
+                {
+                    optionId = value;
+                    OnPropertyChanged(nameof(OptionId));
+                }
+            }
         }
-
-        public int OptionId { get; }
 
         private RebarBarType duongKinh;
         public RebarBarType Diameter
@@ -21,13 +26,12 @@ namespace RebarStair.RebarStair.Model
             get => duongKinh;
             set
             {
-                // Bỏ qua null: ComboBox có thể tạm gán null khi đổi SelectedRebarOption,
-                // nếu nhận vào sẽ làm mất preview và hỏng việc tạo thép.
-                if (value is null || ReferenceEquals(duongKinh, value)) return;
-
-                duongKinh = value;
-                OnPropertyChanged(nameof(Diameter));
-                OnPropertyChanged(nameof(DuongKinh));
+                if (duongKinh != value)
+                {
+                    duongKinh = value;
+                    OnPropertyChanged(nameof(Diameter));
+                    OnPropertyChanged(nameof(DuongKinh));
+                }
             }
         }
 
@@ -59,7 +63,7 @@ namespace RebarStair.RebarStair.Model
         }
 
         public event Action<RebarOption>? Selected;
-        public string Name { get; }
+        public string Name { get; set; }
 
     }
 }

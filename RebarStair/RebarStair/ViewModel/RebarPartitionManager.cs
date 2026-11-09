@@ -1,4 +1,4 @@
-namespace RebarStair.RebarStair.Model
+namespace RebarStair.RebarStair.ViewModel
 {
     public static class RebarPartitionManager
     {

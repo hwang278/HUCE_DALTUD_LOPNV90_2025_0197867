@@ -1,6 +1,6 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
-using RebarStair.RebarStair.Model;
+using RebarStair.RebarStair.ViewModel;
 
 
 namespace RebarStair.helpers
